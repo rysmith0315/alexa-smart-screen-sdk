@@ -54,6 +54,13 @@ public:
     bool startStreamingMicrophoneData() override;
 
     /**
+     * Whether the microphone is currently streaming.
+     *
+     * @return Whether the microphone is streaming.
+     */
+    bool isStreaming() override;
+
+    /**
      * Destructor.
      */
     ~PortAudioMicrophoneWrapper();
@@ -111,6 +118,11 @@ private:
      * threads.
      */
     std::mutex m_mutex;
+
+    /**
+     * Whether the microphone is currently streaming.
+     */
+    bool m_isStreaming;
 };
 
 }  // namespace sampleApp

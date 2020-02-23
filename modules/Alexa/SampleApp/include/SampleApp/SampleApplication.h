@@ -42,6 +42,7 @@
 
 #include <CapabilitiesDelegate/CapabilitiesDelegate.h>
 #include <ExternalMediaPlayer/ExternalMediaPlayer.h>
+#include <AVSCommon/Utils/MediaPlayer/PooledMediaPlayerFactory.h>
 
 namespace alexaSmartScreenSDK {
 namespace sampleApp {
@@ -200,8 +201,11 @@ private:
     /// The @c MediaPlayer used by @c SpeechSynthesizer.
     std::shared_ptr<ApplicationMediaPlayer> m_speakMediaPlayer;
 
-    /// The @c MediaPlayer used by @c AudioPlayer.
-    std::shared_ptr<ApplicationMediaPlayer> m_audioMediaPlayer;
+    /// The @c MediaPlayerFactory used by @c AudioPlayer.
+    std::unique_ptr<alexaClientSDK::mediaPlayer::PooledMediaPlayerFactory> m_audioMediaPlayerFactory;
+
+    /// The Pool of @c MediaPlayers used by @c AudioPlayer (via @c PooledMediaPlayerFactory)
+    std::vector<std::shared_ptr<ApplicationMediaPlayer>> m_audioMediaPlayerPool;
 
     /// The @c MediaPlayer used by @c Alerts.
     std::shared_ptr<ApplicationMediaPlayer> m_alertsMediaPlayer;
